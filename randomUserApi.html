@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random User Generator</title>
+  <link rel="stylesheet" href="randomUserApi.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Random User Generator</h2>
+
+    <input type="number" id="userCount" placeholder="Enter number of users" min="1" max="50">
+    <button id="generateBtn">Generate Users</button>
+
+    <table id="userTable">
+      <thead>
+        <tr>
+          <th>
+            <select id="nameSelect">
+              <option value="first">First Name</option>
+              <option value="last">Last Name</option>
+            </select>
+          </th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody"></tbody>
+    </table>
+  </div>
+
+  <script src="randomUserApi.js"></script>
+</body>
+</html>
