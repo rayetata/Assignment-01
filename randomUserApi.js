@@ -9,6 +9,10 @@ const modalPicture = document.getElementById('modalPicture');
 const modalName = document.getElementById('modalName');
 const modalAddress = document.getElementById('modalAddress');
 const modalEmail = document.getElementById('modalEmail');
+const modalPhone = document.getElementById('modalPhone');
+const modalCell = document.getElementById('modalCell');
+const modalDob = document.getElementById('modalDob');
+const modalGender = document.getElementById('modalGender');
 
 // Action buttons
 const editUserBtn = document.getElementById('editUser');
@@ -19,6 +23,10 @@ const editForm = document.getElementById('editForm');
 const editName = document.getElementById('editName');
 const editAddress = document.getElementById('editAddress');
 const editEmail = document.getElementById('editEmail');
+const editPhone = document.getElementById('editPhone');
+const editTelephone = document.getElementById('editTelephone');
+const editDob = document.getElementById('editDob');
+const editGender = document.getElementById('editGender');
 const saveEditBtn = document.getElementById('saveEdit');
 const cancelEditBtn = document.getElementById('cancelEdit');
 
@@ -71,6 +79,10 @@ function openModal(user) {
   modalName.textContent = `${user.name.first} ${user.name.last}`;
   modalAddress.textContent = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
   modalEmail.textContent = user.email;
+  modalPhone.textContent = `Phone: ${user.phone}`;
+  modalCell.textContent = `Telephone: ${user.cell}`;
+  modalDob.textContent = `Date of Birth: ${new Date(user.dob.date).toLocaleDateString()}`;
+  modalGender.textContent = `Gender: ${user.gender}`;
   editForm.style.display = "none";
   modal.modal('show'); // bootstrap open
 }
@@ -91,7 +103,6 @@ generateBtn.addEventListener("click", () => {
 
   getUsers(count);
 });
-
 
 // Name select change
 nameSelect.addEventListener("change", () => {
@@ -114,6 +125,10 @@ editUserBtn.addEventListener("click", () => {
     editName.value = `${user.name.first} ${user.name.last}`;
     editAddress.value = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
     editEmail.value = user.email;
+    editPhone.value = user.phone;
+    editTelephone.value = user.cell;
+    editDob.value = new Date(user.dob.date).toISOString().split('T')[0];
+    editGender.value = user.gender;
     editForm.style.display = "block";
   }
 });
@@ -127,6 +142,10 @@ saveEditBtn.addEventListener("click", () => {
     user.name.last = lastNameParts.join(" ") || user.name.last;
 
     user.email = editEmail.value || user.email;
+    user.phone = editPhone.value || user.phone;
+    user.cell = editTelephone.value || user.cell;
+    user.dob.date = editDob.value || user.dob.date;
+    user.gender = editGender.value || user.gender;
     user.location.street.name = editAddress.value || user.location.street.name;
 
     setUsersInfo(currentUsers);
