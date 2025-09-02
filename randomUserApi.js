@@ -84,8 +84,14 @@ generateBtn.addEventListener("click", () => {
     return;
   }
 
+  if (count > 1000) {
+    alert("⚠️ Maximum number of users allowed is 1000.");
+    return;
+  }
+
   getUsers(count);
 });
+
 
 // Name select change
 nameSelect.addEventListener("change", () => {
