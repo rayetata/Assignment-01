@@ -77,7 +77,11 @@ function setUsersInfo(users) {
 function openModal(user) {
   modalPicture.src = user.picture.large;
   modalName.textContent = `${user.name.first} ${user.name.last}`;
-  modalAddress.textContent = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
+
+  // Check if fullAddress exists, else build from parts
+  modalAddress.textContent = user.fullAddress ||
+    `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
+
   modalEmail.textContent = user.email;
   modalPhone.textContent = `Phone: ${user.phone}`;
   modalCell.textContent = `Telephone: ${user.cell}`;
@@ -122,8 +126,10 @@ deleteUserBtn.addEventListener("click", () => {
 editUserBtn.addEventListener("click", () => {
   if (selectedUserIndex !== null) {
     const user = currentUsers[selectedUserIndex];
+
     editName.value = `${user.name.first} ${user.name.last}`;
-    editAddress.value = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
+    editAddress.value = user.fullAddress ||
+      `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.country}`;
     editEmail.value = user.email;
     editPhone.value = user.phone;
     editTelephone.value = user.cell;
@@ -146,7 +152,9 @@ saveEditBtn.addEventListener("click", () => {
     user.cell = editTelephone.value || user.cell;
     user.dob.date = editDob.value || user.dob.date;
     user.gender = editGender.value || user.gender;
-    user.location.street.name = editAddress.value || user.location.street.name;
+
+    // Save full address as one string
+    user.fullAddress = editAddress.value || user.fullAddress;
 
     setUsersInfo(currentUsers);
     openModal(user);
