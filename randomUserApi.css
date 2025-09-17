@@ -6,18 +6,15 @@ body {
   margin: 0;
 }
 
-/* keep container max width */
 .container {
   max-width: 900px;
 }
 
-/* Buttons */
 button {
   border-radius: 8px;
   cursor: pointer;
 }
 
-/* Table */
 table {
   background: transparent;
 }
@@ -27,12 +24,15 @@ th, td {
   text-align: center;
 }
 
-/* Custom modal theme (purple) */
+tr:hover {
+  cursor: pointer;
+  background-color: #e0d4f2;
+}
+
 .bg-light-purple {
   background: #c8abdc;
 }
 
-/* Edit form inside modal */
 .edit-form input {
   border-radius: 6px;
   font-size: 14px;
