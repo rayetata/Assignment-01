@@ -27,6 +27,7 @@ app.get("/api", (req, res) => {
   const genders = ["male","female"];
   const countries = ["USA","Canada","UK","UAE","Japan","Chile","Poland","Finland","Uruguay","Africa","Lebanon","Egypt","Jerusalem","Italy","Rome","Greece","Iceland","China","Philippines","Australia"];
 
+  
   const users = [];
   for (let i = 0; i < count; i++) {
     const gender = genders[Math.floor(Math.random()*genders.length)];
