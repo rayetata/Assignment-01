@@ -1,17 +1,18 @@
-const express = require("express");
-const path = require("path");
+const express = require("express"); // import express to create server
+const path = require("path"); // to handle file paths
 
+//create server  using express
 const app = express();
-const PORT = 3000;
+const PORT = 3000; //port will listen for requests
 
 // Serve HTML, CSS, JS
-app.use(express.static(__dirname));
+app.use(express.static(__dirname)); // makes all files in the folder available
 
 // Serve images folder
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images'))); // serve images from local images folder
 
 // Serve HTML on root
-app.get("/", (req, res) => {
+app.get("/", (req, res) => { // kun 
   res.sendFile(path.join(__dirname, "randomUserApi.html"));
 });
 
