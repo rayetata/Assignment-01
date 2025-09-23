@@ -39,7 +39,7 @@ function layout(title, content) {
   `;
 }
 
-// -------------------- Home Page --------------------
+// Home Page
 app.get("/", (req, res) => {
   res.send(
     layout("Home", `
@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
   );
 });
 
-// -------------------- Signup Page --------------------
+// Signup Page
 app.get("/signup", (req, res) => {
   res.send(
     layout("Signup", `
@@ -92,7 +92,7 @@ app.post("/signup", (req, res) => {
   res.send(layout("Signup Successful", "<p>Signup successful! You can now <a href='/login'>log in</a>.</p>"));
 });
 
-// -------------------- Login Page --------------------
+// Login Page
 app.get("/login", (req, res) => {
   res.send(
     layout("Login", `
@@ -141,7 +141,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-// -------------------- Profile Page --------------------
+// Profile page (protected)
 app.get("/profile", (req, res) => {
   if (!req.session.user) {
     return res.send(layout("Unauthorized", "<p>You must be logged in. <a href='/login'>Login</a></p>"));
@@ -156,7 +156,7 @@ app.get("/profile", (req, res) => {
   );
 });
 
-// -------------------- Logout --------------------
+// Logout
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -166,5 +166,5 @@ app.get("/logout", (req, res) => {
   });
 });
 
-// -------------------- Start Server --------------------
+// Start server
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
