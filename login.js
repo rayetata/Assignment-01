@@ -1,26 +1,26 @@
-const express = require("express"); // import express to create server
-const session = require("express-session"); // session handling
+const express = require("express"); // import express to create server, framework for creating web applications
+const session = require("express-session"); // session handling, store data across requests
 const path = require("path"); // handle file paths
 
-const app = express(); // initialize express app
-const PORT = process.env.PORT || 3000; // set server port
+const app = express(); // initialize express app, creates the app object
+const PORT = process.env.PORT || 3000; // set server port, local 3000 or from environment variable
 
 const users = {}; // in-memory "database" for storing users
 
 // Middleware
-app.use(express.urlencoded({ extended: true })); // parse form data
+app.use(express.urlencoded({ extended: true })); // parse form data, read data from POST requests
 app.use(
-  session({
-    secret: "some very secret key", // secret for session encryption
+  session({ // configure session handling, session storage
+    secret: "some very secret key", // secret for session encryption, in short this is a encryption key
     resave: false, // don't resave unchanged sessions
     saveUninitialized: false, // don't save empty sessions
   })
 );
 
-// serve static files (like style.css) from the same folder as login.js
+// serve static files (CSS) 
 app.use(express.static(__dirname));
 
-// layout function to wrap pages with HTML + CSS link
+// layout function to wrap pages with HTML + CSS link, template for pages, or template function
 function layout(title, content) {
   return `
   <!DOCTYPE html>
@@ -126,7 +126,7 @@ app.post("/login", (req, res) => {
     return res.send(layout("Error", "<p>Password is incorrect. <a href='/login'>Try again</a></p>"));
   }
 
-  // save user session
+  // save user session, or save session data
   req.session.user = {
     email: user.email,
     firstName: user.firstName,
@@ -141,12 +141,12 @@ app.post("/login", (req, res) => {
   );
 });
 
-// Profile page (protected)
+// Profile page (protected), this will only show if the user is logged in
 app.get("/profile", (req, res) => {
-  if (!req.session.user) {
+  if (!req.session.user) {// otherwise  
     return res.send(layout("Unauthorized", "<p>You must be logged in. <a href='/login'>Login</a></p>"));
   }
-  res.send(
+  res.send( // if login success
     layout("Profile", `
       <h1>Profile</h1>
       <p><b>Name:</b> ${req.session.user.firstName} ${req.session.user.lastName}</p>
@@ -166,5 +166,5 @@ app.get("/logout", (req, res) => {
   });
 });
 
-// Start server
+// Start server in a chosen port, so i can access it in the browser
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
